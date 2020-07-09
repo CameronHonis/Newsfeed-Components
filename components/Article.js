@@ -85,6 +85,19 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Test Article',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `Sunt ad quis aute reprehenderit tempor cupidatat anim eu veniam mollit cupidatat veniam id proident. Laborum aliquip officia dolore 
+        sit aute laboris. Excepteur eu dolor ut officia reprehenderit eiusmod laborum. Enim ad incididunt laboris exercitation do laborum pariatur officia ipsum. 
+        Esse exercitation cupidatat id non sit culpa do tempor cillum est Lorem sunt.`,
+
+    secondParagraph: `Ut labore ullamco ea ex sit aute est laborum ex fugiat minim. Duis adipisicing ipsum velit nisi quis nulla quis velit ut aliqua. In 
+    do labore ex elit Lorem occaecat.`,
+
+    thirdParagraph: `Eiusmod commodo adipisicing ea fugiat cillum elit aliquip. Culpa elit ad sint nostrud. Aute ex id ipsum consequat dolor reprehenderit 
+    consectetur enim. Ea ipsum nulla est magna mollit non ad labore nisi magna Lorem. Ex officia ad magna eiusmod laboris ea sint tempor mollit aute ullamco nulla.`
   }
 ];
 
@@ -111,3 +124,43 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+function articleMaker(articleData){
+    let articleDiv = document.createElement('div')
+    let articleH2 = document.createElement('h2')
+    let articlePDate = document.createElement('p')
+    let articleP1 = document.createElement('p')
+    let articleP2 = document.createElement('p')
+    let articleP3 = document.createElement('p')
+    let articleSpan = document.createElement('span')
+
+    articleDiv.appendChild(articleH2)
+    articleDiv.appendChild(articlePDate)
+    articleDiv.appendChild(articleP1)
+    articleDiv.appendChild(articleP2)
+    articleDiv.appendChild(articleP3)
+    articleDiv.appendChild(articleSpan)
+
+    articleDiv.className = 'article'
+    articleH2.textContent = articleData.title
+    articlePDate.textContent = articleData.date
+    articlePDate.className = 'date'
+    articleP1.textContent = articleData.firstParagraph
+    articleP2.textContent = articleData.secondParagraph
+    articleP3.textContent = articleData.thirdParagraph
+    articleSpan.textContent = '+'
+    articleSpan.className = 'expandButton'
+
+    articleSpan.addEventListener('click',(e) => {
+        articleDiv.classList.toggle('article-open')
+    })
+    
+    return articleDiv
+}
+
+for (let i = 0; i < data.length; i++){
+    let article = articleMaker(data[i])
+    document.querySelector('.articles').appendChild(article)
+    gsap.from(article,{x: 100, opacity: 0, delay: .15*i})
+}
+//gsap.from('.article',{x: 100, opacity: 0, delay: .5})
+//tl.from('img',{duration: 1, opacity: 0, y: -30, ease: 'bounce.out'})
